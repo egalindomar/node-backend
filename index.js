@@ -1,6 +1,10 @@
 const {ApolloServer} = require('apollo-server');
 const typeDefs =  require('./DB/schema');
 const resolvers = require('./DB/resolvers');
+const conectarDB = require('./config/db');
+
+
+conectarDB();
 
 const server = new ApolloServer({
     typeDefs,
