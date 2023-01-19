@@ -8,7 +8,7 @@ require('dotenv').config({path: 'config.env'});
 const crearToken = (usuario, secreta, expiresIn) => {
     console.log(usuario);
     const {id,email,nombre,apellido} = usuario;
-    return jwt.sign({id,email,nombre,apellido}, secreta,{expiresIn}) 
+    return jwt.sign({id,email,nombre,apellido},secreta,{expiresIn}) 
 }
 
 
@@ -17,6 +17,23 @@ const resolvers = {
         obtenerUsuario: async (_, {token}) => {
             const usuarioId = await jwt.verify(token, process.env.SECRETA )
             return usuarioId
+        },
+        obtenerProductos: async () => {
+            try{
+                const productos = await Producto.find({});
+                return productos;
+            }catch (error){
+                console.log(error);
+            }
+        },
+        obtenerProducto: async (_, {id}) =>{
+            const producto = await Producto.findById(id);
+
+            if(!producto){
+                throw new Error('Producto no encontrado o no existe!')
+            }
+
+            return producto;
         }
     },
     Mutation:{
@@ -69,6 +86,28 @@ const resolvers = {
             }catch(error){
                 console.log(error);
             }
+        },
+        actualizarProducto: async (_, {id, input}) => {
+            let producto = await Producto.findById(id);
+
+            if(!producto){
+                throw new Error('Producto no encontrado o no existe!')
+            }
+
+            producto = await Producto.findOneAndUpdate({_id : id}, input, {new: true});
+
+            return producto;
+        },
+        eliminarProducto: async(_, {id}) => {
+            let producto = await Producto.findById(id);
+
+            if(!producto){
+                throw new Error('Producto no encontrado o no existe!')
+            }
+
+            await Producto.findByIdAndRemove({_id: id});
+
+            return "Producto eliminado";
         }
 
         
