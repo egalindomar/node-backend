@@ -32,7 +32,7 @@ const ClientesSchema =  mongoose.Schema({
         default: Date.now()
     },
     vendedor:{
-        type: mongoose.ObjectIdSchema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Usuario'
     }

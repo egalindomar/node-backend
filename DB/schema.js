@@ -26,7 +26,7 @@ const typeDefs = gql`
     type Cliente{
         id: ID
         nombre: String
-        apeliido: String
+        apellido: String
         empresa: String
         email: String
         telefono: String
