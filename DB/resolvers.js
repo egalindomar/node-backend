@@ -190,6 +190,9 @@ const resolvers = {
             await Cliente.findOneAndDelete({_id: id});
             return "Cliente Eliminado"
 
+        },
+        nuevoPedido: async (_, {input},ctx) =>{
+                       
         }
 
         
