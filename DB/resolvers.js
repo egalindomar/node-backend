@@ -192,7 +192,39 @@ const resolvers = {
 
         },
         nuevoPedido: async (_, {input},ctx) =>{
-                       
+            const {cliente} = input
+
+            let clienteExistente = await Cliente.findById(cliente);
+
+            if(!clienteExistente){
+                throw new Error('Ese cliente no existe');
+            }
+
+            if(clienteExistente.vendedor.toString() != ctx.usuario.id){
+                throw new Error ('No es tu cliente');
+            }
+
+            for await (const articulo of input.pedido){
+                const {id} = articulo;
+                const producto = await Producto.findById(id);
+
+                //console.log(producto);
+
+                if(articulo.cantidad > producto.existencia){
+                    throw new Error(`El articulo: ${producto.nombre} excede la cantidad disponible`);
+                } else {
+                    producto.existencia = producto.existencia - articulo.cantidad;
+                    await producto.save();
+                }
+            }
+
+            const nuevoPedido = new Pedido(input);
+
+            nuevoPedido.vendedor = ctx.usuario.id;
+
+            const resultado = await nuevoPedido.save();
+
+            console.log('depues del error...');
         }
 
         
