@@ -9,7 +9,7 @@ require("dotenv").config({ path: "config.env" });
 const crearToken = (usuario, secreta, expiresIn) => {
   console.log(usuario);
   const { id, email, nombre, apellido } = usuario;
-  return jwt.sign({ id, email, nombre, apellido }, secreta, { expiresIn });
+  return jwt.sign({ id, email}, secreta, { expiresIn });
 };
 
 const resolvers = {

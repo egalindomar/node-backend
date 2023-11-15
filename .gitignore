@@ -1,3 +1,6 @@
+#Ignore VsCode and Jetbrains Configs
+/.idea
+
 #Ignore Node Modules
 /node_modules
 

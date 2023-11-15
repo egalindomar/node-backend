@@ -11,9 +11,17 @@ Need make a new file of configuration, the by default is config.env and finded i
 
 ```
 touch config.env
-
 ```
+Inside the file you have to carry two variables which are MONGO_DB and the JWT encryption key, which is called "SECRETA"
+With that you have everything you need to run the project.
 
-|Hello|Example |Example 2 |
-|:--- |:---:| ---:|
-|EXAMPLE3| SAS| sdsdsdsd|
+[//]: # ()
+[//]: # (|Hello|Example |Example 2 |)
+
+[//]: # (|:--- |:---:| ---:|)
+
+[//]: # (|EXAMPLE3| SAS| sdsdsdsd|)
+
+[//]: # (|EXAMPLE3| SAS| sdsdsdsd|)
+
+[//]: # (|EXAMPLE3| SAS| sdsdsdsd|)
